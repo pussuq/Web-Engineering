@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<title>Example</title>
+<style>
+    * {
+        box-sizing: border-box; 
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    header {
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+    }
+    body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        margin: 0;
+        background: #edeae4;
+    }
+    #main {
+        display: flex;
+        flex: 1;
+        line-height: 300%;
+    }
+
+    #main > nav, 
+    #main > aside {
+        flex: 0 0 50vw;
+    }
+
+    #main > nav {
+        order: -1;
+    }
+    header {
+        background:#373838;
+        color: white;
+        height: 20vh;
+    }
+
+    footer {
+        background: #00212a;
+        color: white;
+        height: 20vh;
+    }
+
+    header, footer, nav, aside {
+        padding: 1em;
+    }
+    button{
+        background-color: #ff8528;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 50px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+    }
+    header {
+        display: flex;
+        padding: 25px;
+        height: 10vh;
+        justify-content: center;
+        text-align: center;
+    }
+    .navbar {
+        display: flex;
+    
+    }
+
+    .navbar a {
+        color: white;
+        padding: 1px 20px;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    h1 {
+        text-align: center;
+    }
+    footer {
+        text-align: center;
+    }
+
+    img {
+        width: 70%;
+        padding-left: 30px;
+    }
+    
+    aside {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+</style>
+<body>
+  <header>
+      <div class="navbar">
+        <a href="#">The book series</a>
+        <a href="#">Testmonials</a>
+        <a href="#">The Author</a>
+        <a href="#">Free resources</a>
+      </div>
+  </header>
+  <h1>You dont know JavaScript</h1>
+  <div id="main">
+    <nav>
+        <img src="https://kaul.inf.h-brs.de/wem/assets/img/landing-img.png" alt="Javascript Buch">
+    </nav>
+    <aside>
+        <p>Don't just drift through Javascript</p>
+        <p>Understand how Javascript works</p>
+        <p>Start your journey through the bumpy side of Javascript</p>
+        <button type="button">ORDER YOUR COPY NOW</button> 
+    </aside>
+  </div>
+  <footer>
+      <p>The first ebook in this book series is absolutly free.</p>
+      <button type="button">FIND OUT MORE ABOUT THIS OFFER</button> 
+  </footer>
+  <a href="index.html">zurück</a>
+</body>
