@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Layout mit Flexbox</title>
+
+    <style>
+        .wrapper {
+            display: flex;
+            flex-flow: row wrap;
+            text-align: center;
+        }
+
+        .wrapper > * {
+            padding: 10px;
+            margin: 5px;
+            flex: 1 100%;
+            border-radius: 10px;
+        }
+
+        .header {
+            background: #ff0000;
+            height: 120px;
+        }
+
+        
+        .main {
+            text-align: left;
+            background: #0037fe;
+            height: 300px;
+            font-size: 20px;
+        }
+
+        .aside1 {
+            background: #00f145; 
+            color: #00f145;      
+        }
+
+        .aside2 {
+            background: #ff2bf9;
+            color: #ff2bf9;
+        }
+
+        @media all and (min-width: 1200px){
+            .main {
+                flex: 4;
+            }
+
+            .aside1 { 
+                flex: 1;
+            }
+
+            .aside2 {
+                flex: 1;
+                order:3;
+            }
+
+            .main {
+                order: 2;
+            }
+
+        }
+
+        @media all and (min-width: 600px){
+            .main {
+                flex: 2;
+            }
+
+            .aside1 {
+                flex: 1;
+            }
+
+        }
+
+        @media all and (min-width: 200px){
+
+            .main {
+                order: 3;
+            }
+
+            .aside1 {
+                order: 2;
+            }
+
+            .aside2 {
+                order: 4;
+            }
+        }
+    </style>
+</head>
+  
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <!-- <h1>Header</h1> -->
+        </header>
+        <article class="main">
+            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quod velit a optio ea aliquam asperiores, veritatis explicabo dolores quia fugiat dicta provident, consequuntur alias officiis? Libero commodi autem nam.</p> -->
+        </article>
+        <aside class="aside aside1">
+            <h1>Aside1</h1>
+        </aside>
+        <aside class="aside aside2">
+            <h1>Aside2</h1>
+        </aside>
+    </div>
+    <a href="../index.html">zurück</a>
+</body>
+</html>

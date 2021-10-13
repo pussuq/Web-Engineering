@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HolyGrail Flexbox</title>
+
+    <style>
+        body {
+            display:flex;
+            flex-direction: column;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        /* .header {
+            display: flex;
+            width: 100%;
+            height: 16vh;
+            background: #d74746;
+            color: white;
+            font-size: 28px;
+            padding-top: 0px;
+            padding-bottom: 2vh;
+            margin-top: 0px;
+            border-radius: 15px 15px 0 0; 
+            flex-direction: row;
+            justify-content:flex-start;
+            align-content: flex-start;
+            flex-wrap: wrap;
+        } */
+
+        .body {
+            display: flex;
+            flex: 1;
+            color: white;
+        }
+
+        .content {
+            flex: 1;
+            background: #529eb8;
+            font-size:x-large;
+        }
+
+        .links, .rechts {
+            flex: 0 0 30vh;
+            background: #d37c76;
+            font-size: 30px;
+            padding-left: 5vh;
+            padding-right: 5vh;
+        }
+        
+        .links {
+            order: -1;
+        }
+
+        .foot {
+            background-color: #000000;
+            color: white;
+            border-radius: 0 0 15px 15px;
+        }
+        
+        a {
+            color: white;
+        }
+
+        .header{
+            display: flex;
+            flex-wrap: wrap;
+            justify-self: flex-start;
+            background: #d74746;
+            color: white;
+            font-size: 28px;
+            width: 100%;
+            height: 22vh;
+            padding-top: 0px;
+            padding-bottom: 2vh;
+            margin-top: 0px;
+            border-radius: 15px 15px 0 0; 
+        }
+
+        .head {
+            flex: 0 0 100%;
+            /* background: #d74746;
+            color: white; */
+        }
+
+        .child2 > button{
+            flex: 0 0 5%;
+            background: #676d96;
+            color: white;
+            border: 2px outset white;
+            border-radius: 12px;
+            margin-left: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .foot {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 10px;
+            font-size: 20px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="head"><h1>Header</h1></div>
+        <div class="child2">
+            <button type="button" class="button">Home</button>
+            <button type="button" class="button">News</button>
+            <button type="button" class="button">Contact</button>
+            <button type="button" class="button">About</button>
+        </div>
+    </header>
+
+    <div class="body">
+        <main class="content">
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corporis sit inventore tempora nulla nostrum dolores molestias ullam cum tempore at distinctio ratione ipsam harum, ad maiores exercitationem itaque perferendis atque eaque ipsa vel voluptatem in natus alias! Non tempora sapiente dolores quibusdam tempore sit, qui iure! Dolorum aliquid provident quaerat quos assumenda sunt corrupti nisi perferendis veniam, rerum neque omnis ea rem corporis. Incidunt excepturi ipsum quo alias, in voluptate enim odio, sunt dolorum rerum repellat labore? Consequatur beatae aliquam, dolorem explicabo, optio, quam id error magnam accusamus doloribus velit ducimus qui est. Earum illum exercitationem ex officiis perspiciatis, optio error laboriosam rerum, corrupti corporis eos id? Saepe repellat fugit nihil praesentium quam alias est libero repellendus deleniti quae earum rerum a voluptatibus autem itaque, obcaecati, excepturi id expedita sed aut. Veritatis molestias perspiciatis eligendi harum laboriosam praesentium earum consequatur aut nostrum odit labore amet, ut maiores? Praesentium beatae iusto sit earum cum quaerat quam officiis enim dolorem nisi non repudiandae vero magni dicta sunt, minus qui deserunt labore ipsam assumenda distinctio ut excepturi quibusdam suscipit! Quibusdam totam repudiandae ipsa perferendis ea, magni accusamus praesentium facilis explicabo atque, quae fuga quidem dicta eaque. Neque nihil, aut vitae quaerat cum cumque accusantium? Porro consequuntur temporibus fuga, dolorem voluptate possimus, vitae voluptatem deleniti obcaecati vel cupiditate illo. Architecto in doloribus quia illo eum provident quidem ex, reprehenderit quis nostrum esse eveniet quisquam tempora soluta impedit et veniam! Ullam fuga modi quas non libero accusantium atque voluptatem animi reprehenderit? Ratione pariatur soluta explicabo facilis doloremque at, voluptatibus sed beatae, modi doloribus voluptatem id perferendis illo ab. Eos, minima distinctio, perferendis mollitia, molestias ut nisi quaerat explicabo cumque nemo illum adipisci qui autem odit perspiciatis eum repellat accusantium quae et harum. Dignissimos placeat alias consequuntur cupiditate distinctio non earum fugit sit possimus? Sunt, modi?</p>
+        </main>
+
+        <nav class="links">
+            <h1>left menu with many items</h1>
+        </nav>
+
+        <aside class="rechts">
+            <h1>right</h1>
+        </aside>
+    </div>
+    <footer class="foot">
+        <h1>Footer:</h1>
+        <a href="#">Sidemap</a>
+        <a href="#">Home</a>
+        <a href="#">News</a>
+        <a href="#">Contact</a>
+        <a href="#">About</a>
+    </footer>
+
+</body>
+</html>

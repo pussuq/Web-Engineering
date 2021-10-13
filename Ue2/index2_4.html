@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing-Page Grid</title>
+    <style>
+        body{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            font-family: Roboto, Arial, sans-serif;
+        }
+
+        nav{
+            grid-column: 1 / -1;
+            grid-row: 1;
+        }
+
+        header{
+            grid-column: 1 / -1;
+            grid-row: 2;
+        }
+
+        aside{
+            grid-column: 1;
+            grid-row: auto;
+        }
+
+        main{
+            grid-column: 2;
+            grid-row: auto;
+        }
+
+        footer{
+            grid-column: 1 / -1;
+        }
+
+        nav, footer{
+            background: #373838;
+            color:white;
+            font-size: 18px;
+        }
+
+        header, aside, main{
+            background: #F1F3F4;
+        }
+
+        .list li a{
+            text-decoration: none;
+            color: white;
+        }
+
+        li{
+            list-style: none;
+        }
+
+        nav{
+            display: grid;
+            /* align-items: center; */
+            justify-items: center;
+        }
+
+        header{
+            text-align: center;
+        }
+
+        img{
+            width: 50%;
+            margin: 2vh 10vh 2vh 10vh;
+        }
+
+        main{
+            text-align: center;
+            font-size: 22px;
+        }
+
+        button{
+            background-color: #ff8528;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 50px;
+            text-align: center;
+            text-decoration: none;
+            /* display: inline-block; */
+            font-size: 16px;
+            margin: 4px 2px;
+        }
+
+        footer{
+            text-align: center;
+            padding: 15px;
+        }
+
+        .list{
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            align-items: center;
+            justify-items: center;
+            width: 1100px;
+            height: 10vh;
+            margin: auto;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul class="list">
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#">The book series</a></li>
+            <li><a href="#">Testimonials</a></li>
+            <li><a href="#">The Author</a></li>
+            <li><a href="#">Free resources</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>You dont know JavaScript</h1>
+    </header>
+
+    <aside>
+        <img src="https://kaul.inf.h-brs.de/wem/assets/img/landing-img.png" alt="Book Cover">
+    </aside>
+
+    <main>
+        <p>Don't just drift through Javascript.</p>
+        <p>Understand how Javascript works</p>
+        <p>Start your journey through the bumpy side of Javascript</p>
+        <button type="button">ORDER YOUR COPY NOW</button> 
+    </main>
+
+    <footer>
+        <p>The first ebook in this book series is absolutly free.</p>
+        <button type="button" class="button2">FIND OUT MORE ABOUT THIS OFFER</button> 
+    </footer>
+    <a href="../index.html">zurück</a>
+</body>
+</html>
