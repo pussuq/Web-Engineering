@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.2: Advanced Functional JavaScript Programming </title>
+    <!-- <link rel="stylesheet" href="/path/to/styles/default.css"> -->
+    <!-- <link rel="stylesheet" href="highlight\styles\github-dark.min.css"> -->
+    <link rel="stylesheet" href="styles\monokai-sublime.min.css">
+    <link  rel="stylesheet" href="styles\style2.css">
+    <script src="highlight\highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<body>
+    <h1>Aufgabe 3.2: Advanced Functional JavaScript Programming </h1>
+    <pre>
+        <code class="language-javascript">
+        // Make a function that makes a publish/subscribe object. It will reliably deliver all publications to all
+        // subscribers in the right order.
+        // my_pubsub = pubsub();
+        // my_pubsub.subscribe(alert);
+        // my_pubsub.publish("It works!"); // alert("It works!")
+        function pubsub(){
+            return {
+                subs : [],
+                subscribe: function(fnc){
+                    this.subs.push(fnc);
+                },
+                publish: function(text){
+                    this.subs.forEach(element => {
+                        element(text);
+                    });
+                }
+            }
+        }
+        my_pubsub = pubsub();
+        
+        my_pubsub.subscribe(alert);
+        
+        my_pubsub.publish("It works!"); // alert("It works!")
+
+        
+        // Make a factory that makes functions that generate unique symbols.
+        // gensym = gensymf('G');
+        // gensym() // 'G0'
+        // gensym() // 'G1'
+        // gensym() // 'G2'
+        // gensym() // 'G3'
+        function gensymf(symbol){
+            let x = 0;
+            return function(){
+                return symbol + x++;
+            }
+        }
+        gensym = gensymf('G');
+        console.log(gensym());  // G0
+        console.log(gensym());  // G1
+        console.log(gensym());  // G2
+        console.log(gensym());  // G3
+
+        
+        // Make a function that returns a function that will return the next fibonacci number.
+        // var fib = fibonaccif(0, 1);
+        // fib() // 0
+        // fib() // 1
+        // fib() // 1
+        // fib() // 2
+        // fib() // 3
+        // fib() // 5
+        function fibonacci(x, y){
+            return function(){
+                let next = x;
+                x = y;
+                y += next;
+                return next;
+            }
+        }
+        var fb = fibonacci(0, 1);
+        console.log(fb());   // 0  
+        console.log(fb());   // 1  
+        console.log(fb());   // 1  
+        console.log(fb());   // 2  
+        console.log(fb());   // 3  
+        console.log(fb());   // 5
+
+        
+        // Write a function that adds from many invocations, until it sees an empty invocation.
+        // addg(3)(4)(5)() // 12
+        // addg(1)(2)(4)(8)() // 15
+        function addg(x){
+            return function(y){
+                if(y === undefined ){
+                    return x;
+                }
+                return addg( x + y );
+            }
+        }
+        console.log(addg(3)(4)(5)());       // 12
+        console.log(addg(1)(2)(4)(8)());    // 15
+
+        
+        // Write a function that will take a binary function and apply it to many invocations.
+        // applyg(add)(3)(4)(5)() // 12
+        // applyg(add)(1)(2)(4)(8)() // 15
+        function add(x, y){
+            return x + y;
+        }
+        
+        function mul(x, y){
+            return x * y;
+        }
+        
+        function applyg(binary){
+            return function(x){
+                if( x === undefined ){
+                    return x;
+                }
+                return function func(y){
+                    if( y === undefined ){
+                        return x;
+                    }
+                    x = binary(x, y);
+                    return func;
+                };
+            };
+        }
+        console.log(applyg(mul)(3)(4)(5)());
+        console.log(applyg(add)(1)(2)(4)(8)());
+            
+            
+        </code>   
+    </pre>
+    <a href="../index.html">zurück</a>
+</body>
+</html>

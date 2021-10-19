@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.1 Funktionen in JavaScript</title>
+    <!-- <link rel="stylesheet" href="/path/to/styles/default.css"> -->
+    <!-- <link rel="stylesheet" href="highlight\styles\github-dark.min.css"> -->
+    <link rel="stylesheet" href="styles\monokai-sublime.min.css">
+    <link  rel="stylesheet" href="styles\style2.css">
+    <script src="highlight\highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<body>
+    <h1>Aufgabe 3.1: Funktionen in JavaScript</h1>
+    <pre>
+        <code class="language-javascript">
+        // Schreiben Sie eine Funktion identity_function(), die ein Argument als Parameter entgegen nimmt und eine 
+        // Funktion zurück gibt, die dieses Argument zurück gibt.
+        function identity_function(arg){
+            return function(){
+                return arg;
+            }
+        }
+            
+        
+        // Schreiben Sie eine Addier-Funktion addf(), so dass addf(x)(y) genau x + y zurück gibt. (Es haben also zwei 
+        // Funktionsaufrufe zu erfolgen. addf(x) liefert eine Funktion, die auf y angewandt wird.)
+        function addf(x){
+            return function(y){
+                return x + y;
+            }
+        }
+        console.log(addf(3)(4));  // 7
+
+
+        // Schreiben Sie eine Funktion applyf(), die aus einer binären Funktion wie add(x,y) eine Funktion addf
+        // berechnet, die mit zwei Aufrufen das gleiche Ergebnis liefert, z.B. addf = applyf(add); addf(x)(y) soll 
+        // add(x,y) liefern. Entsprechend applyf(mul)(5)(6) soll 30 liefern, wenn mul die binäre Multiplikation ist.
+        function mul(x, y){
+            return x * y;
+        }
+
+        function add(x, y){
+            return x + y;
+        }
+
+        function applyf(funct){
+            return function(a){
+                return function(b){
+                    return funct(a, b);
+                }
+            }
+        }
+        console.log(applyf(add)(3)(4));
+
+
+        // Schreiben Sie eine Funktion curry() (von Currying), die eine binäre Funktion und ein Argument nimmt, um
+        // daraus eine Funktion zu erzeugen, die ein zweites Argument entgegen nimmt, z.B. add3 = curry(add, 3); add3(4)
+        // ergibt 7. curry(mul, 5)(6) ergibt 30.
+        function mul(x, y){
+            return x * y;
+        }
+
+        function add(x, y){
+            return x + y;
+        }
+
+        function curry(funct, a){
+            return function(b){
+                return funct(a, b);
+            }
+        }
+        console.log(curry(add, 5)(6));
+
+
+        // Erzeugen Sie die inc-Funktion mit Hilfe einer der Funktionen addf, applyf und curry aus den letzten Aufgaben,
+        // ohne die Funktion inc() selbst zu implementieren. (inc(x) soll immer x + 1 ergeben und lässt sich natürlich 
+        // auch direkt implementieren. Das ist aber hier nicht die Aufgabe.) Vielleicht schaffen Sie es auch, drei 
+        // Varianten der inc()-Implementierung zu schreiben?
+        var inc = function(x){
+            return addf(x)(1);
+        }
+
+        var inc = function(x){
+            return applyf(add)(x)(1);
+        }
+
+        var inc = function (x){
+            return curry(add, x)(1);
+        }
+
+
+        // Schreiben Sie eine Funktion methodize(), die eine binäre Funktion (z.B. add, mul) in eine unäre Methode 
+        // verwandelt. Nach Number.prototype.add = methodize(add); soll (3).add(4) genau 7 ergeben.
+        function methodize(funct){
+            return function(value){
+                return funct(this, value);
+            }
+        }
+        Number.prototype.Add = methodize(add);
+        // (1).Add(2) => 3
+
+
+        // Schreiben Sie eine Funktion demethodize(), die eine unäre Methode (z.B. add, mul) in eine binäre Funktion
+        // umwandelt. demethodize(Number.prototype.add)(5, 6) soll 11 ergeben.
+        function demethodize(fn){
+            return function(x, y){
+                return fn.call(x, y);
+            };
+        }
+
+        var newAdd = demethodize(Number.prototype.Add);
+        console.log(newAdd(5, 6)) // 11 
+
+
+        // Schreiben Sie eine Funktion twice(), die eine binäre Funktion in eine unäre Funktion umwandelt, die den einen
+        // Parameter zweimal weiter reicht. Z.B. var double = twice(add); double(11) soll 22 ergeben; var square = twice
+        // (mul); square(11) soll mul(11,11) === 121 ergeben.
+        function twice(fn){
+            return function(x){
+                return fn(x, x)
+            }
+        }
+        console.log(twice(add)(11));    // 22
+        console.log(twice(mul)(11));    // 121
+
+
+        // Schreiben Sie eine Funktion composeu(), die zwei unäre Funktionen in eine einzelne unäre Funktion
+        // transformiert, die beide nacheinander aufruft, z.B. soll composeu(double, square)(3) genau 36 ergeben.
+        function double(x){
+            return x + x;
+        }
+
+        function square(x){
+            return x * x;
+        }
+
+        function composeu(fn1, fn2){
+            return function(x){
+                return fn2(fn1(x));
+            };
+        }
+        console.log(composeu(double, square)(3));   // 36
+
+
+        // Schreiben Sie eine Funktion composeb(), die zwei binäre Funktionen in eine einzelne Funktion transformiert,
+        // die beide nacheinander aufruft, z.B. composeb(add, mul)(2, 3, 5) soll 25 ergeben.
+        function composeb(fn1, fn2){
+            return function(x, y, z){
+                return fn2(fn1(x, y), z);
+            }
+        }
+        console.log(composeb(add, mul)(2, 3, 5));
+
+
+        // Schreiben Sie eine Funktion once(), die einer anderen Funktion nur einmal erlaubt, aufgerufen zu werden,
+        // z.B. add_once = once(add); add_once(3, 4) soll beim ersten Mal 7 ergeben, beim zweiten Mal soll jedoch 
+        // add_once(3, 4) einen Fehlerabbruch bewirken.
+        function once(fn){
+            let executed = false;
+            return function(x, y){
+                if (!executed) {
+                    executed = true;
+                    return fn(x, y);
+                } else {
+                    throw Error("Die Funktion kann nur einmal ausgeführt werden.")
+                }
+            };
+        }
+
+        add_once = once(add);
+
+        console.log(add_once(3, 4));
+        console.log(add_once(5, 6));
+
+                    
+        // Schreiben Sie eine Fabrik-Funktion counterf(), die zwei Funktionen inc() und dec() berechnet, die einen
+        // Zähler hoch- und herunterzählen. Z.B. counter = counterf(10); Dann soll counter.inc() 11 und counter.dec()
+        // wieder 10 ergeben.
+        function counterf(x){
+            return {
+                inc: function() {
+                    return x += 1;
+                },
+                dec: function() {
+                    return x -= 1;
+                }
+            }
+        }
+
+        let counter = counterf(10)
+        console.log(counter.inc());
+        console.log(counter.dec());
+
+
+        // Schreiben Sie eine rücknehmbare Funktion revocable(), die als Parameter eine Funktion nimmt und diese bei 
+        // Aufruf ausführt. Sobald die Funktion aber mit revoke() zurück genommen wurde, führt ein erneuter Aufruf zu 
+        // einem Fehler. Z.B. 
+        // temp = revocable(alert); 
+        // temp.invoke(7); // führt zu alert(7); 
+        // temp.revoke(); 
+        // temp.invoke(8); // Fehlerabbruch!  
+        function answer(x){
+            console.log(`Erfolg ${x}`);
+        }
+
+        function revocable(fn){
+            let revoked = false;
+            return {
+                invoke: function(x){
+                    if(!revoked){
+                        fn(x);
+                    } else {
+                        throw Error("Fehlerabbruch!")
+                    }
+                },
+
+                revoke: function(){
+                    revoked = true;
+                }
+            }
+        }
+
+        let temp = revocable(answer);
+        temp.invoke(7);     // Erfolg 7
+        temp.revoke();
+        temp.invoke(8);     // Error: Fehlerabbruch!
+
+
+        // Implementieren Sie ein "Array Wrapper"-Objekt mit den Methoden get, store und append, so dass ein Angreifer 
+        // keinen Zugriff auf das innere, private Array hat.
+        // my_vector = vector();
+        // my_vector.append(7);
+        // my_vector.store(1, 8);
+        // my_vector.get(0)     // 7
+        // my_vector.get(1)     // 8
+        function vector(){
+            let array = [];
+            return {
+                append: function(x){
+                    array[0] = x;
+                },
+                store: function(x, y){
+                    array[x] = y;
+                },
+                get: function(x){
+                    return array[x];
+                }
+            }
+        }
+
+        my_vector = vector();
+        my_vector.append(7);
+        my_vector.store(1, 8);
+        console.log(my_vector.get(0));      // 7
+        console.log(my_vector.get(1));      // 8 
+        </code>   
+    </pre>
+    <a href="../index.html">zurück</a>
+</body>
+</html>

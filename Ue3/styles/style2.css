@@ -1,0 +1,17 @@
+pre > code{
+    display: flex;
+    font-size: 18px;
+    width: 80%;
+    justify-content: center;
+    margin-left: 10%;
+    white-space: pre-wrap;
+}
+
+h1 {
+    text-align: center;
+    color: black;
+}
+
+body {
+    background-color:azure;
+}
