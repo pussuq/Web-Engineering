@@ -57,8 +57,8 @@
 
 
         // Schreiben Sie eine Funktion curry() (von Currying), die eine binäre Funktion und ein Argument nimmt, um
-        // daraus eine Funktion zu erzeugen, die ein zweites Argument entgegen nimmt, z.B. add3 = curry(add, 3); add3(4)
-        // ergibt 7. curry(mul, 5)(6) ergibt 30.
+        // daraus eine Funktion zu erzeugen, die ein zweites Argument entgegen nimmt, z.B. add3 = curry(add, 3); 
+        // add3(4) ergibt 7. curry(mul, 5)(6) ergibt 30.
         function mul(x, y){
             return x * y;
         }
@@ -75,10 +75,10 @@
         console.log(curry(add, 5)(6));
 
 
-        // Erzeugen Sie die inc-Funktion mit Hilfe einer der Funktionen addf, applyf und curry aus den letzten Aufgaben,
-        // ohne die Funktion inc() selbst zu implementieren. (inc(x) soll immer x + 1 ergeben und lässt sich natürlich 
-        // auch direkt implementieren. Das ist aber hier nicht die Aufgabe.) Vielleicht schaffen Sie es auch, drei 
-        // Varianten der inc()-Implementierung zu schreiben?
+        // Erzeugen Sie die inc-Funktion mit Hilfe einer der Funktionen addf, applyf und curry aus den letzten 
+        // Aufgaben, ohne die Funktion inc() selbst zu implementieren. (inc(x) soll immer x + 1 ergeben und
+        // lässt sich natürlich auch direkt implementieren. Das ist aber hier nicht die Aufgabe.) Vielleicht 
+        // schaffen Sie es auch, drei Varianten der inc()-Implementierung zu schreiben?
         var inc = function(x){
             return addf(x)(1);
         }
@@ -92,8 +92,8 @@
         }
 
 
-        // Schreiben Sie eine Funktion methodize(), die eine binäre Funktion (z.B. add, mul) in eine unäre Methode 
-        // verwandelt. Nach Number.prototype.add = methodize(add); soll (3).add(4) genau 7 ergeben.
+        // Schreiben Sie eine Funktion methodize(), die eine binäre Funktion (z.B. add, mul) in eine unäre 
+        // Methode verwandelt. Nach Number.prototype.add = methodize(add); soll (3).add(4) genau 7 ergeben.
         function methodize(funct){
             return function(value){
                 return funct(this, value);
@@ -103,8 +103,8 @@
         // (1).Add(2) => 3
 
 
-        // Schreiben Sie eine Funktion demethodize(), die eine unäre Methode (z.B. add, mul) in eine binäre Funktion
-        // umwandelt. demethodize(Number.prototype.add)(5, 6) soll 11 ergeben.
+        // Schreiben Sie eine Funktion demethodize(), die eine unäre Methode (z.B. add, mul) in eine binäre 
+        // Funktion umwandelt. demethodize(Number.prototype.add)(5, 6) soll 11 ergeben.
         function demethodize(fn){
             return function(x, y){
                 return fn.call(x, y);
@@ -115,9 +115,9 @@
         console.log(newAdd(5, 6)) // 11 
 
 
-        // Schreiben Sie eine Funktion twice(), die eine binäre Funktion in eine unäre Funktion umwandelt, die den einen
-        // Parameter zweimal weiter reicht. Z.B. var double = twice(add); double(11) soll 22 ergeben; var square = twice
-        // (mul); square(11) soll mul(11,11) === 121 ergeben.
+        // Schreiben Sie eine Funktion twice(), die eine binäre Funktion in eine unäre Funktion umwandelt, die 
+        // den einen Parameter zweimal weiter reicht. Z.B. var double = twice(add); double(11) soll 22 ergeben; 
+        // var square = twice (mul); square(11) soll mul(11,11) === 121 ergeben.
         function twice(fn){
             return function(x){
                 return fn(x, x)
@@ -145,8 +145,8 @@
         console.log(composeu(double, square)(3));   // 36
 
 
-        // Schreiben Sie eine Funktion composeb(), die zwei binäre Funktionen in eine einzelne Funktion transformiert,
-        // die beide nacheinander aufruft, z.B. composeb(add, mul)(2, 3, 5) soll 25 ergeben.
+        // Schreiben Sie eine Funktion composeb(), die zwei binäre Funktionen in eine einzelne Funktion 
+        // transformiert, die beide nacheinander aufruft, z.B. composeb(add, mul)(2, 3, 5) soll 25 ergeben.
         function composeb(fn1, fn2){
             return function(x, y, z){
                 return fn2(fn1(x, y), z);
@@ -176,9 +176,9 @@
         console.log(add_once(5, 6));
 
                     
-        // Schreiben Sie eine Fabrik-Funktion counterf(), die zwei Funktionen inc() und dec() berechnet, die einen
-        // Zähler hoch- und herunterzählen. Z.B. counter = counterf(10); Dann soll counter.inc() 11 und counter.dec()
-        // wieder 10 ergeben.
+        // Schreiben Sie eine Fabrik-Funktion counterf(), die zwei Funktionen inc() und dec() berechnet, die 
+        // einen Zähler hoch- und herunterzählen. Z.B. counter = counterf(10); Dann soll counter.inc() 11 und 
+        // counter.dec() wieder 10 ergeben.
         function counterf(x){
             return {
                 inc: function() {
@@ -195,9 +195,9 @@
         console.log(counter.dec());
 
 
-        // Schreiben Sie eine rücknehmbare Funktion revocable(), die als Parameter eine Funktion nimmt und diese bei 
-        // Aufruf ausführt. Sobald die Funktion aber mit revoke() zurück genommen wurde, führt ein erneuter Aufruf zu 
-        // einem Fehler. Z.B. 
+        // Schreiben Sie eine rücknehmbare Funktion revocable(), die als Parameter eine Funktion nimmt und 
+        // diese bei Aufruf ausführt. Sobald die Funktion aber mit revoke() zurück genommen wurde, führt ein 
+        // erneuter Aufruf zu einem Fehler. z.B. 
         // temp = revocable(alert); 
         // temp.invoke(7); // führt zu alert(7); 
         // temp.revoke(); 
@@ -229,8 +229,8 @@
         temp.invoke(8);     // Error: Fehlerabbruch!
 
 
-        // Implementieren Sie ein "Array Wrapper"-Objekt mit den Methoden get, store und append, so dass ein Angreifer 
-        // keinen Zugriff auf das innere, private Array hat.
+        // Implementieren Sie ein "Array Wrapper"-Objekt mit den Methoden get, store und append, so dass ein 
+        // Angreifer keinen Zugriff auf das innere, private Array hat.
         // my_vector = vector();
         // my_vector.append(7);
         // my_vector.store(1, 8);
