@@ -127,7 +127,236 @@
         }
         console.log(applyg(mul)(3)(4)(5)());
         console.log(applyg(add)(1)(2)(4)(8)());
-            
+        
+        
+
+
+        // Write a function m that takes a value and an optional source string and returns them in an object.
+        // JSON.stringify(m(1)) // {"value": 1, "source": "1"}
+        // JSON.stringify(m(Math.PI, "pi")) // {"value": 3.14159..., "source": "pi"}
+        function m(value, source){
+            return{
+                "value": value,
+                "source": (source === undefined ? value: source)
+            };
+        }
+        console.log(JSON.stringify(m(1)));
+        console.log(JSON.stringify(m(Math.PI, "pi")));
+
+        // Write a function addm that takes two m objects and returns an m object.
+        // JSON.stringify(addm(m(3), m(4))) // {"value": 7, "source": "(3+4)"}
+        function m(value, source){
+            return{
+                "value": value,
+                "source": (source === undefined ? value: source)
+            };
+        }
+
+        function addm(x, y){
+            return {
+                value: x.value + y.value,
+                source: "("+ x.value + "+" + y.value + ")"
+            }
+        }
+        console.log(JSON.stringify(addm(m(3), m(4))));
+
+        // Write a function binarymf that takes a binary function and a string and returns a 
+        // function that acts on m objects.
+        // addm = binarymf(add, "+");
+        // JSON.stringify(addm(m(3), m(4))) // {"value": 7, "source": "(3+4)"}
+        function m(value, source){
+            return{
+                "value": value,
+                "source": (source === undefined ? value: source)
+            };
+        }
+
+        function addm(x, y){
+            return {
+                value: x.value + y.value,
+                source: "("+ x.value + "+" + y.value + ")"
+            }
+        }
+
+        function binarymf(fnc, str){
+            return addm(x, y)
+        }
+
+        console.log(JSON.stringify(addm(m(3), m(4))));
+
+        // Modify function binarymf so that the functions it produces can accept arguments that are 
+        // either numbers or m objects.
+        // addm = binarymf(add, "+");
+        // JSON.stringify(addm(3, 4)) // {"value": 7, "source": "(3+4)"}
+        function m(value, source){
+            return{
+                "value": value,
+                "source": (source === undefined ? value: source)
+            };
+        }
+
+        function add (x, y){
+            return x + y;
+        }
+
+        function mul (x, y){
+            return x * y;
+        }
+
+        function binarymf(fnc, operant){
+            return function(x, y){
+                    if ( typeof(x) === 'object' ) x = x.value;
+                    if ( typeof(y) === 'object' ) y = y.value;
+                    return {
+                        value: fnc(x, y),
+                        source: "("+ x + operant + y + ")"
+                    }
+            }
+        }
+
+        addm = binarymf( add, '+');
+        console.log(JSON.stringify(addm(m(3), m(4))));
+        console.log(JSON.stringify(addm(3, 7)));
+
+        addm = binarymf( mul, "*" );
+        console.log(JSON.stringify(addm(m(3), m(4))));
+        console.log(JSON.stringify(addm(3, 7)));
+
+        // Write function unarymf, which is like binarymf except that it acts on unary functions.
+        // squarem = unarymf(square, "square");
+        // JSON.stringify(squarem(4)) // {"value": 16, "source": "(square 4)"}
+        function m(value, source){
+            return{
+                "value": value,
+                "source": (source === undefined ? value: source)
+            };
+        }
+
+        function square( x ){
+            return x**2;
+        }
+
+        function unarymf(func, operant){
+            return function( x )  {
+                return {
+                    value: func( x ),
+                    source: "(" + operant + " " + x + ")"
+                }
+            }
+        }
+        let squarem = unarymf(square, "square");
+        console.log(JSON.stringify(squarem(4))) // {"value": 16, "source": "(square 4)"}
+
+        // Write a function that takes the lengths of two sides of a triangle and computes the length 
+        // of the hypotenuse. (Hint: c2 = a2 + b2)
+        // hyp(3, 4) // 5
+        function hyp(x, y){
+            return Math.sqrt(x**2 + y**2)
+        }
+
+        console.log(hyp(3,4));      // 5
+
+        // Write a function that evaluates array expressions.
+        // hypa = [ Math.sqrt, [ add, [mul, 3, 3], [mul, 4, 4] ] ];
+        // exp(hypa) // 5
+        function add( x, y ){
+            return x + y;
+        }
+
+        function mul( x, y ){
+            return x * y;
+        }
+
+        function exp(values){
+            if(Array.isArray(values)){
+                const [func, ...args] = values;
+                return func(...args.map(exp));
+            }
+            return values;
+        }
+
+        hypa = [Math.sqrt, [ add, [ mul, 3, 3 ], [ mul, 4, 4 ]]];
+        console.log(exp(hypa));     // 5
+
+        // Make a function that stores a value in a variable.
+        // var variable; store(5); // variable === 5
+        function store(value){
+            variable = value;
+        }
+
+        // function store(value){
+        //     var variable = value;
+        //     return variable;
+        // }
+        // console.log(store (5));
+
+
+        // Make a function that takes a binary function, two functions that provide operands, and a 
+        // function that takes the result.
+        // quatre( add, identityf(3), identityf(4), store ); // variable === 7
+        function add(x, y){
+            return x + y;
+        }
+
+        function identityf(x){
+            return x; 
+        }
+
+        function store(value){
+            var variable = value;
+            return variable;
+        }
+
+        function quatre(fnc, x, y, storefnc){
+            let result = fnc( x, y );
+            return storefnc(result);
+        }
+
+        console.log(quatre( add, identityf(3), identityf(4), store ));
+
+        // Make a function that takes a unary function, and returns a function that takes an argument 
+        // and a callback.
+        // sqrtc = unaryc(Math.sqrt); sqrt(81, store) // variable === 9
+        function store(value){
+            var variable = value;
+            return variable;
+        }
+
+        function unaryc(fnc){
+            return function(arg, callback){
+                return callback(fnc(arg));
+            }
+        }
+        let sqrtc = unaryc(Math.sqrt);
+        console.log(sqrtc(81, store));      // 9
+
+
+        // Make a function that takes a binary function, and returns a function that takes two arguments 
+        // and a callback.
+        // addc = binaryc(add); addc(4, 5, store) // variable === 9
+        // mulc = binaryc(mul); mulc(2, 3, store) // variable === 6
+        function add(x, y){
+            return x + y;
+        }
+
+        function mul(x, y){
+            return x * y;
+        }
+
+        function store(value){
+            var variable = value;
+            return variable;
+        }
+
+        function binaryc(fnc){
+            return function(x, y, callback){
+                return callback(fnc(x, y))
+            }
+        }
+        let addc = binaryc(add);
+        let mulc = binaryc(mul);
+        console.log(addc(4, 5, store));     // 9
+        console.log(mulc(2, 3, store));     // 6
             
         </code>   
     </pre>
