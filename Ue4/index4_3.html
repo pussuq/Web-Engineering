@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabellenkalkulation</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        table, th, td {
+            border:1px solid black;
+            border-collapse: collapse;
+        }
+
+        table {
+            margin-left: auto;
+            margin-right: auto;
+            width: 170px;
+            height: 50px;
+            text-align: center;
+        }
+
+
+        td {
+            width:  50px;
+            height: 50px;
+            margin: 20px;
+            empty-cells: show;
+            font-size: 20px;
+            font-weight: lighter;
+            text-align: right;
+        }
+
+        #cell3 {
+            text-align: center;
+        }
+
+        button {
+            margin-left: 50%;
+            margin-top: 20px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 18px;
+        }
+
+      </style>
+</head>
+<body>
+    <h1>Tabellenkalkulation</h1>
+    <h1>mit contentEditable</h1>
+
+    <table id='table'>
+        <tr>
+            <td>a=</td>
+            <td><input name="number1" type="text" id='num1'/></td>
+        </tr>
+        <tr>
+            <td>b=</td>
+            <td><input name="number2" type="text" id='num2'/></td>
+        </tr>
+        <tr>
+            <td>Operation=</td>
+            <td><input type="text" id="operation"></td>
+        </tr>
+        <tr>
+            <td>SUM=</td>
+            <td id="cell3"></td>
+        </tr>
+    </table>
+
+    <button id='calcBtn'>Berechne!</button>
+    <!-- <button onclick="myFunction()" id='calcBtn'>Berechne!</button> -->
+
+    <p>Erlaubte Operationen: '=SUM' (Addition), '=DIV' (Subtraktion), '=PRO' (Multiplikation), '=QUO' (Division),</p>
+
+    <script language="javascript" type="text/javascript" src="ue4_3.js"></script>
+    <a href="../index.html">zurück</a>
+</body>
+</html>
