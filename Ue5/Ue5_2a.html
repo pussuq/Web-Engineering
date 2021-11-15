@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>5.2 async/await</title>
+</head>
+
+<body>
+    <div id="div"> </div>
+    <script>
+        async function init() {
+            let txt1, txt2;
+            // let respA = await fetch('http://localhost:8080/a.txt');
+            let respA = await fetch('a.txt');
+            txt1 = await respA.text();
+            if (txt2 !== undefined) {
+                merge(txt1, txt2);
+            }
+            // let respB = await fetch('http://localhost:8080/b.txt');
+            let respB = await fetch('b.txt');
+            txt2 = await respB.text();
+            if (txt1 !== undefined) {
+                merge(txt1, txt2);
+            }
+        }
+
+        function merge(txt1, txt2) {
+            let aLines = txt1.split('\r\n');
+            let bLines = txt2.split('\r\n');
+            let endString = "";
+            console.log();
+            for (let i = 0; i < Math.max(aLines.length, bLines.length); i++) {
+                endString += "<div>";
+                if (i < aLines.length) {
+                    endString += aLines[i];
+                }
+                if (i < bLines.length) {
+                    endString += bLines[i];
+                }
+                endString += "<div>";
+            }
+            let div = document.getElementById("div");
+            div.innerHTML = endString;
+        }
+        init();
+    </script>
+</body>
+
+</html>

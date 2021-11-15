@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>5.1 Promises</title>
+</head>
+
+<body>
+<div id="text"></div>
+<script>
+	function fetchUrl(url){
+		return fetch(url).then(function(response){
+			return response.text();
+		});
+	}
+
+	const div = document.getElementById("text");
+
+    // Promise.all([fetchUrl('http://localhost:8080/a.txt'), fetchUrl('http://localhost:8080/b.txt')])
+	Promise.all([fetchUrl('a.txt'), fetchUrl('b.txt')])
+	.then(data => {
+		const txt1 = data[0].split("\n");
+		const txt2 = data[1].split("\n");
+
+		for(let i=0; i<txt1.length; i++){
+			div.innerHTML += "<br>" + txt1[i] + txt2[i];
+		}
+	});
+
+</script>
+</body>
+</html>
